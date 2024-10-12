@@ -11,7 +11,7 @@ const Home = () => {
   const [inclusion, setInclusion] = useState<string>("")
 
   const handleNewProd = async (): Promise<void> => {
-    const productResponse = await( await fetch("http://localhost:5000/newProduct", {
+    const productResponse = await( await fetch("http://localhost:8000/newProduct", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

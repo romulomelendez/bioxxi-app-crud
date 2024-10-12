@@ -1,22 +1,23 @@
-# Use root/example as user/password credentials
-version: '3.1'
-
 services:
-
   db:
-    image: mysql
-    restart: always
+    image: mariadb:latest
+    container_name: laravel-mariadb
+    restart: unless-stopped
     environment:
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: products
       MYSQL_USER: romulo
       MYSQL_PASSWORD: teste
-      MYSQL_ROOT_PASSWORD: teste
-    ports:
-      - "3306:3306"
-    expose:
-      - "3306"
     volumes:
-      - products_data:/var/lib/mysql
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - laravel-network
 
 volumes:
-  products_data:
+  dbdata:
+
+networks:
+  laravel-network:
+    driver: bridge
