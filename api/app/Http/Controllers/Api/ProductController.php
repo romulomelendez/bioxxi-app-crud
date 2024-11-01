@@ -45,7 +45,6 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-
         $product = Product::findOrFail($id);
         $product->update($request->all());
 
@@ -55,8 +54,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $id) {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted successfully!'
+        ], 200);
     }
 }
