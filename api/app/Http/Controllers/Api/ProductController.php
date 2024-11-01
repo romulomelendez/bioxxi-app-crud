@@ -30,7 +30,6 @@ class ProductController extends Controller
             'description' => 'string'
         ]);
 
-        // echo $request->all();
         $product = Product::create($validatedProduct);
         return response()->json($product, 201);
     }
@@ -40,15 +39,17 @@ class ProductController extends Controller
      */
     public function show(string $id) {
         return product::findOrFail($id);
-        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, string $id) {
+
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+
+        return $product;
     }
 
     /**
